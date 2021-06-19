@@ -2,9 +2,10 @@
   padding: 15px 60px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #eee;
 }
 
 .blog-title {
   cursor: pointer;
+  font-size: 24px;
+  font-weight: 600;
 }

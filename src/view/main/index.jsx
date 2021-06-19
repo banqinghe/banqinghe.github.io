@@ -1,12 +1,21 @@
+import { Switch, Route } from 'react-router-dom';
 import Content from '../content';
-import styles from './styles.module.css';
+import PostPage from '../content/post-page';
+import styles from './index.module.css';
 
 function Main() {
   return (
-    <main className={styles['main-content']}>
-      <Content />
+    <main className={styles["main-content"]}>
+      <Switch>
+        <Route path="/post">
+          <PostPage postIndex={0} />
+        </Route>
+        <Route path="/">
+          <Content />
+        </Route>
+      </Switch>
     </main>
-  )
+  );
 }
 
 export default Main;

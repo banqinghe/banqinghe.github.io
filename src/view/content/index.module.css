@@ -1,0 +1,48 @@
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-item:nth-last-child(n + 2) {
+  margin-bottom: 30px;
+}
+
+.post-title {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.post-title:hover {
+  text-decoration: underline 2px solid #1f2329;
+}
+
+.post-info {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 0 0;
+}
+
+.post-date {
+  margin: 0 10px 0 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.tag {
+  padding: 3px 6px;
+  border-radius: 6px;
+  display: inline-block;
+  background: #f1f1f1;
+  font-size: 12px;
+}
+
+.tag:nth-of-type(n + 2) {
+  margin-left: 10px;
+}
+
+.description {
+  font-size: 14px;
+}

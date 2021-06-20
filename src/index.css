@@ -18,3 +18,10 @@ code {
   flex-direction: column;
   color: #1f2329;
 }
+
+.markdown-body .highlight pre, .markdown-body pre {
+  padding: 0 !important;
+  overflow: unset !important;
+  font-size: 16px !important;
+  border-radius: 6px !important;
+}

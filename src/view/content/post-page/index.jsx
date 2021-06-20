@@ -13,8 +13,6 @@ import styles from './index.module.css';
 
 const components = {
   code({node, inline, className, children, ...props}) {
-    console.log(className);
-    console.log(vs);
     vs['code[class*="language-"]'].fontFamily = "Menlo, \"Consolas\", \"Bitstream Vera Sans Mono\", \"Courier New\", Courier, monospace";
     vs['code[class*="language-"]'].lineHeight = "20px";
     vs['pre[class*="language-"]'].border = "";

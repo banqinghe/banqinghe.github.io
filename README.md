@@ -5,7 +5,7 @@
 ## main lib
 
 - [react](https://github.com/facebook/react), [react-router](https://github.com/ReactTraining/react-router), [create-react-app](https://github.com/facebook/create-react-app)
-- [react-markdown](https://github.com/remarkjs/react-markdown), [remark-gfm](https://github.com/remarkjs/remark-gfm)
+- [react-markdown](https://github.com/remarkjs/react-markdown), [remark-gfm](https://github.com/remarkjs/remark-gfm), [rehype-raw](https://github.com/rehypejs/rehype-raw), [remark-math](https://github.com/remarkjs/remark-math), [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex), [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
 - [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
 ## todo

@@ -4,8 +4,9 @@
 
 ## main lib
 
-- [React](https://github.com/facebook/react), [React Router](https://github.com/ReactTraining/react-router), [create-react-app](https://github.com/facebook/create-react-app)
+- [react](https://github.com/facebook/react), [react-router](https://github.com/ReactTraining/react-router), [create-react-app](https://github.com/facebook/create-react-app)
 - [react-markdown](https://github.com/remarkjs/react-markdown), [remark-gfm](https://github.com/remarkjs/remark-gfm)
+- [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
 ## todo
 

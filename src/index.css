@@ -13,15 +13,15 @@ code {
 }
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: #1f2329;
 }
 
 .markdown-body .highlight pre, .markdown-body pre {
-  padding: 0 !important;
-  overflow: unset !important;
-  font-size: 16px !important;
-  border-radius: 6px !important;
+  padding: 0;
+  overflow: unset;
+  font-size: 16px;
+  border-radius: 6px;
 }

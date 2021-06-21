@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'; 
-import data from '../../config/post-list.json';
+import data from '../../../config/post-list.json';
 import styles from './index.module.css';
 
 function Content() {

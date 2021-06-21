@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
-import Content from '../content';
-import PostPage from '../content/post-page';
+import Content from './post-list';
+import PostPage from './post-page';
 import styles from './index.module.css';
 
 function Main() {

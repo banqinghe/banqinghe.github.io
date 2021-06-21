@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'github-markdown-css';
 import './index.css';
 import Blog from './view/blog';
 import reportWebVitals from './reportWebVitals';

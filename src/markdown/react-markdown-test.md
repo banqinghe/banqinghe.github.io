@@ -77,24 +77,12 @@ You should probably combine it with
 You can pass components to change things:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Markdown from 'react-markdown'
-import MyFancyRule from './components/my-fancy-rule.js'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Markdown from 'react-markdown';
+import MyFancyRule from './components/my-fancy-rule.js';
 
-ReactDOM.render(
-  <Markdown
-    components={{
-      // Use h2s instead of h1s
-      h1: 'h2',
-      // Use a component instead of hrs
-      hr: ({node, ...props}) => <MyFancyRule {...props} />
-    }}
-  >
-    # Your markdown here
-  </Markdown>,
-  document.querySelector('#content')
-)
+console.log('啥也没有，就是玩耍');
 ```
 
 ## More info?

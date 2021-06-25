@@ -28,12 +28,20 @@ function Directory(props) {
     }
   }, [headerList, listToRender, onComplete]);
 
+  const scrollToTarget = (id) => {
+    console.log('scroll to id:', id);
+    document.getElementById(id).scrollIntoView();
+  };
+
   return (
     <div className={styles.directory}>
       <ul className={styles.list}>
         {[...listToRender].map(({id, content}) => (
-          <li className={cn(styles[`list-item-${id[0]}`], styles['list-item'])} key={id}>
-            <a href={`#${id}`}>{content}</a>
+          <li
+            className={cn(styles[`list-item-${id[0]}`], styles['list-item'])}
+            key={id}
+            onClick={() => scrollToTarget(id)}>
+            {content}
           </li>
         ))}
       </ul>

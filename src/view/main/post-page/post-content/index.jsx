@@ -23,7 +23,7 @@ function PostContent(props) {
       levelCounter.current.fill(0);
     }
     levelCounter.current[level]++;
-    const id = `${level}-${Math.ceil(levelCounter.current[level] / 2)}`;
+    const id = `${level}-${levelCounter.current[level]}`;
     onDirChange({id, content: children});
     return React.createElement(`h${level}`, { id }, children);
   }, [onDirChange]);

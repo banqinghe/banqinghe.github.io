@@ -6,8 +6,13 @@ import { useCallback, useState } from 'react';
 function PostPage() {
   const [headerList, setHeaderList] = useState([]);
 
+  // 检测到新标题，添加到当前目录尾部
   const handleDirChange = useCallback(item => {
     setHeaderList(headerList => [...headerList, item]);
+  }, []);
+
+  const handleChangeContent = useCallback(() => {
+    setHeaderList([]);
   }, []);
 
   const handleComplete = useCallback(() => {
@@ -17,7 +22,7 @@ function PostPage() {
   return (
     <div className={styles['post-page']}>
       <Directory headerList={headerList} onComplete={handleComplete} />
-      <PostContent onDirChange={handleDirChange} /> 
+      <PostContent onDirChange={handleDirChange} onClear={handleChangeContent} /> 
     </div>
   );
 }

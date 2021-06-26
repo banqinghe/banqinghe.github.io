@@ -9,6 +9,7 @@ export default function pathToModule(pathname) {
   const filename = pathname.substring(startIndex);
   const wordList = filename.split('-');
   return wordList
+    .filter(word => word.length)
     .map(word => word[0].toUpperCase() + word.toLowerCase().substring(1))
     .join('');
 }

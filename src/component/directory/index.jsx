@@ -1,42 +1,46 @@
-import { useEffect, useState } from 'react';
-import { isEqual } from 'lodash';
 import cn from 'classnames';
 import styles from './index.module.css';
 
 function Directory(props) {
-  const { headerList, onComplete } = props;
+  const { headerList } = props;
 
-  const [listToRender, setListToRender] = useState([]);
+  // const [listToRender, setListToRender] = useState([]);
 
-  useEffect(() => {
-    let existSum = 0;
-    for (let i = 0; i < headerList.length; i++) {
-      let exist = false;
-      for (let j = 0; j < listToRender.length; j++) {
-        if (isEqual(headerList[i], listToRender[j])) {
-          exist = true;
-          existSum++;
-          break;
-        }
-      }
-      if (!exist) {
-        setListToRender([headerList[i], ...listToRender])
-      }
-    }
-    if (existSum && existSum >= headerList.length) {
-      onComplete();
-    }
-  }, [headerList, listToRender, onComplete]);
+  // useEffect(() => {
+  //   setListToRender([...listToRender, ])
+  // }, [headerList]);
+
+  // yarn start 后有bug，会出现重复目录项，以下为去重代码
+  // useEffect(() => {
+  //   let existSum = 0;
+  //   for (let i = 0; i < headerList.length; i++) {
+  //     let exist = false;
+  //     for (let j = 0; j < listToRender.length; j++) {
+  //       if (isEqual(headerList[i], listToRender[j])) {
+  //         exist = true;
+  //         existSum++;
+  //         break;
+  //       }
+  //     }
+  //     // 开发环境下 headerList 会有重复项
+  //     if (!exist) {
+  //       setListToRender([headerList[i], ...listToRender])
+  //     }
+  //   }
+  //   // 条目去重
+  //   if (existSum && existSum >= headerList.length) {
+  //     onComplete();
+  //   }
+  // }, [headerList, listToRender, onComplete]);
 
   const scrollToTarget = (id) => {
-    console.log('scroll to id:', id);
     document.getElementById(id).scrollIntoView();
   };
 
   return (
     <div className={styles.directory}>
       <ul className={styles.list}>
-        {[...listToRender].map(({id, content}) => (
+        {[...headerList].map(({id, content}) => (
           <li
             className={cn(styles[`list-item-${id[0]}`], styles['list-item'])}
             key={id}

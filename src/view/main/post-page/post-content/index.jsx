@@ -10,10 +10,11 @@ import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import pathToModule from '../../../../util/pathToModule.js';
 import 'katex/dist/katex.min.css'
 import styles from './index.module.css';
+import getTitle from '../../../../util/getTitle.js';
 
 function PostContent(props) {
-  const { onDirChange } = props;
-  const moduleName = pathToModule(useLocation().pathname);
+  const { onDirChange, onClear } = props;
+  const { pathname } = useLocation();
 
   const [markdown, setMarkdown] = useState();
   const levelCounter = useRef(new Array(7).fill(0));
@@ -51,14 +52,28 @@ function PostContent(props) {
     h6: submitHeading,
   }), [submitHeading]);
 
+  // 路由变化时改变 module name
   useEffect(() => {
+    const moduleName = pathToModule(pathname);
     import('../../../../config/adapter.js')
       .then(module => {
         fetch(module[moduleName])
-          .then(res => res.text())
-          .then(setMarkdown);
+          .then(res => {
+            onClear();
+            if (!/\.md$/.test(res.url)) {
+              document.title = '啥也找不到';
+              throw new Error('no content');
+            }
+            document.title = getTitle(pathname);
+            return res.text();
+          })
+          .then(setMarkdown)
+          .catch(err => {
+            console.error(err);
+            setMarkdown('# 404 Not Found');
+          });
       });
-  }, [moduleName]);
+  }, [pathname, onClear]);
 
   return (
     <div className={styles.content}>

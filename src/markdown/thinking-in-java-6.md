@@ -1,13 +1,3 @@
----
-title: 《Java编程思想》读书笔记 —— 第6章 访问权限控制
-date: 2020-01-16 12:44:26
-categories: Reading Notes
-tags: 
-- Java
-- Thinking in Java
-thumbnail: images/thinkinjava.jpg
-article-thumbnail: false
----
 # 《Java编程思想》读书笔记 —— 第6章 访问权限控制
 
 本章讲述的是面向对象编程中较为基础但是不可或缺的一部分。Java特有的`package`，以及在C++中就已经见到的`public`、`protected`、`private`关键字，和与包的概念紧密相连的`包访问权限`。

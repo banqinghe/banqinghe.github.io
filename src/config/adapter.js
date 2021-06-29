@@ -27,3 +27,4 @@ export { default as ThinkingInJava18 } from '../markdown/thinking-in-java-18.md'
 export { default as GlutLineCircle} from '../markdown/glut-line-circle.md';
 export { default as JavaStackQueueImplement } from '../markdown/java-stack-queue-implement.md';
 export { default as BeautyUbuntu } from '../markdown/beauty-ubuntu.md';
+export { default as CreateBlogWebsite } from '../markdown/create-blog-website.md';

@@ -1,5 +1,14 @@
 [
   {
+    "title": "PWA 笔记",
+    "filename": "pwa-note",
+    "date": "2021-07-02 14:08:47",
+    "pathname": "/post/pwa-note",
+    "tags": [
+      "PWA"
+    ]
+  },
+  {
     "title": "使用 create-react-app 构建静态博客",
     "filename": "create-blog-website",
     "date": "2021-06-29 23:21:27",

@@ -20,10 +20,12 @@ function PostPage() {
   }, []);
 
   return (
-    <div className={styles['post-page']}>
+    <>
       <Directory headerList={headerList} onComplete={handleComplete} />
-      <PostContent onDirChange={handleDirChange} onClear={handleChangeContent} /> 
-    </div>
+      <div className={styles['post-page']}>
+        <PostContent onDirChange={handleDirChange} onClear={handleChangeContent} /> 
+      </div>
+    </>
   );
 }
 

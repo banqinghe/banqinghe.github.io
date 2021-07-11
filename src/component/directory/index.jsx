@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
 import cn from 'classnames';
 import styles from './index.module.css';
 
 function Directory(props) {
   const { headerList } = props;
+  const [collapse, setCollapse] = useState(false);
 
   // const [listToRender, setListToRender] = useState([]);
 
@@ -37,8 +39,14 @@ function Directory(props) {
     document.getElementById(id).scrollIntoView();
   };
 
+  useEffect(() => { 
+    window.addEventListener('dblclick', () => {
+      setCollapse(prevStatus => !prevStatus);
+    })
+  }, []);
+
   return (
-    <div className={styles.directory}>
+    <div className={cn(styles.directory, {[styles.collapse]: collapse})}>
       <ul className={styles.list}>
         {[...headerList].map(({id, content}) => (
           <li

@@ -1,11 +1,17 @@
 .directory {
-  position: sticky;
-  top: 30px;
-  margin: 0 30px 0 100px;
-  max-height: calc(100vh - 100px);
+  position: fixed;
+  top: 50px;
+  left: 0;
   width: 260px;
+  margin: 0 30px 0 10px;
+  max-height: calc(100vh - 100px);
   min-width: 200px;
+  transition: transform .2s ease;
   overflow: auto;
+}
+
+.collapse {
+  transform: translateX(-300px);
 }
 
 .list {

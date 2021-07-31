@@ -1,0 +1,16 @@
+.about {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+td {
+  padding-bottom: 10px;
+}
+
+tr td:first-child {
+  width: 64px;
+}
+
+a {
+  color: #3273e9;
+}

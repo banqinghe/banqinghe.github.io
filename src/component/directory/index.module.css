@@ -1,17 +1,18 @@
 .directory {
   position: fixed;
-  top: 50px;
+  top: 50%;
   left: 0;
   width: 260px;
   margin: 0 30px 0 10px;
   max-height: calc(100vh - 100px);
   min-width: 200px;
+  transform: translateY(-50%);
   transition: transform .2s ease;
   overflow: auto;
 }
 
 .collapse {
-  transform: translateX(-300px);
+  transform: translate(-300px, -50%);
 }
 
 .list {
@@ -24,16 +25,16 @@
 }
 
 .list-item:not(:last-of-type) {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.list-item > a {
+.list-item {
   text-decoration: none;
   color: #1f2329;
-  font-size: 15px;
+  font-size: 14px;
 }
 
-.list-item > a:hover {
+.list-item:hover {
   text-decoration: underline 1px solid #1f2329;
 }
 

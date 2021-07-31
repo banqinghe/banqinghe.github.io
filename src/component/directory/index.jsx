@@ -1,49 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 import styles from './index.module.css';
 
 function Directory(props) {
   const { headerList } = props;
-  const [collapse, setCollapse] = useState(false);
-
-  // const [listToRender, setListToRender] = useState([]);
-
-  // useEffect(() => {
-  //   setListToRender([...listToRender, ])
-  // }, [headerList]);
-
-  // yarn start 后有bug，会出现重复目录项，以下为去重代码
-  // useEffect(() => {
-  //   let existSum = 0;
-  //   for (let i = 0; i < headerList.length; i++) {
-  //     let exist = false;
-  //     for (let j = 0; j < listToRender.length; j++) {
-  //       if (isEqual(headerList[i], listToRender[j])) {
-  //         exist = true;
-  //         existSum++;
-  //         break;
-  //       }
-  //     }
-  //     // 开发环境下 headerList 会有重复项
-  //     if (!exist) {
-  //       setListToRender([headerList[i], ...listToRender])
-  //     }
-  //   }
-  //   // 条目去重
-  //   if (existSum && existSum >= headerList.length) {
-  //     onComplete();
-  //   }
-  // }, [headerList, listToRender, onComplete]);
+  const [collapse, setCollapse] = useState(true);
 
   const scrollToTarget = (id) => {
     document.getElementById(id).scrollIntoView();
   };
 
-  useEffect(() => { 
-    window.addEventListener('dblclick', () => {
-      setCollapse(prevStatus => !prevStatus);
-    })
+  const flipCollapseStatus = () => {
+    setCollapse(prevStatus => !prevStatus);
+  };
+
+  const showDirectoryBySelection = useCallback(() => {
+    const selectedText = window.getSelection().toString();
+    if (!selectedText) {
+      return;
+    }
+    if (selectedText.indexOf('的') !== -1) {
+      flipCollapseStatus();
+    }
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('mouseup', showDirectoryBySelection);
+    return () => {
+      window.removeEventListener('mouseup', showDirectoryBySelection);
+    }
+    
+  }, [showDirectoryBySelection]);
 
   return (
     <div className={cn(styles.directory, {[styles.collapse]: collapse})}>

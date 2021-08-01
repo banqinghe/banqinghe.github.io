@@ -20,6 +20,10 @@
   font-weight: 600;
 }
 
+.blog-menu {
+  display: flex;
+}
+
 .menu-item {
   cursor: pointer;
 }

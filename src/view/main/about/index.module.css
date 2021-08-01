@@ -3,14 +3,14 @@
   margin: 0 auto;
 }
 
-td {
+.about td {
   padding-bottom: 10px;
 }
 
-tr td:first-child {
+.about tr td:first-child {
   width: 64px;
 }
 
-a {
+.about a {
   color: #3273e9;
 }

@@ -1,6 +1,6 @@
-# manual blog
+# blog
 
-新博客，但是还没用。
+个人博客，可通过 [banqinghe.github.io](https://banqinghe.github.io) 访问。
 
 ## main lib
 
@@ -14,6 +14,6 @@
 * [x] 支持 代码语法高亮
 * [x] 支持 LaTeX 数学公式
 * [x] 博文目录
-* [ ] 自动化脚本（创建新博客 ✅，部署 ❎）
+* [x] 自动化脚本 (待完善)
 * [ ] 适配移动端
 * [ ] 分类扩展

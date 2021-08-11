@@ -29,6 +29,9 @@ function Header() {
         <a href="/#">bqh's blog</a>
       </div>
       <div className={styles['blog-menu']}>
+        <div className={styles['menu-item']}><a href="#/">主页</a></div>
+        <div className={styles['menu-item']}><a href="#/note">笔记</a></div>
+        <div className={styles['menu-item']}><a href="#/demo-box">盒子</a></div>
         <div className={styles['menu-item']}><a href="#/about">关于我</a></div>
       </div>
     </header>

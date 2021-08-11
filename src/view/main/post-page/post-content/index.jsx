@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw'
 import remarkMath from 'remark-math'
@@ -14,6 +14,7 @@ import getTitle from '../../../../util/getTitle.js';
 
 function PostContent(props) {
   const { onDirChange, onClear } = props;
+  const history = useHistory();
   const { pathname } = useLocation();
 
   const [markdown, setMarkdown] = useState();
@@ -68,12 +69,11 @@ function PostContent(props) {
             return res.text();
           })
           .then(setMarkdown)
-          .catch(err => {
-            console.error(err);
-            setMarkdown('# 404 Not Found');
+          .catch(() => {
+            history.push('/404');
           });
       });
-  }, [pathname, onClear]);
+  }, [pathname, onClear, history]);
 
   return (
     <div className={styles.content}>

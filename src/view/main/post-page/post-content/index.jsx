@@ -62,7 +62,6 @@ function PostContent(props) {
           .then(res => {
             onClear();
             if (!/\.md$/.test(res.url)) {
-              document.title = '啥也找不到';
               throw new Error('no content');
             }
             document.title = getTitle(pathname);

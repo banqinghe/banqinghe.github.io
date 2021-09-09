@@ -3,6 +3,7 @@ import Home from './post-list';
 import PostPage from './post-page';
 import About from './about';
 import NotFound from '../not-found';
+import DemoBox from './demo-box';
 import styles from './index.module.css';
 
 function Main() {
@@ -12,11 +13,14 @@ function Main() {
         <Route exact path="/post/:title">
           <PostPage />
         </Route>
-        <Route path="/about">
+        <Route exact path="/about">
           <About />
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/demo-box">
+          <DemoBox />
         </Route>
         <Route path="/404" component={NotFound} />
         <Redirect to="/404" />

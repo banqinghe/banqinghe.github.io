@@ -1,0 +1,22 @@
+/*! @import */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply text-gray-800;
+}
+
+::selection {
+    @apply text-white bg-gray-800;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(193,193,193, .6);
+    border-radius: 1000px;
+}

@@ -6,6 +6,8 @@ import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import gfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import Waline from '@waline/client';
+
 import transToCamelCase from '../utils/transToCamelCase';
 import { CatalogNode, getHeadingInfo } from '../utils/catalog';
 import * as urls from '../config/adapter';
@@ -74,6 +76,12 @@ function PostPage() {
         setIsNoContent(true);
         console.error(err);
       });
+
+    Waline({
+      el: '#comments',
+      serverURL: 'https://blog-api-ers1r7f2f-banqinghe.vercel.app/',
+      path: pathname,
+    });
   }, [pathname]);
 
   function scrollToTarget(id: string) {
@@ -122,6 +130,7 @@ function PostPage() {
         >
           {markdownText}
         </ReactMarkdown>
+        <div id="comments" />
       </article>
     </div>
   );

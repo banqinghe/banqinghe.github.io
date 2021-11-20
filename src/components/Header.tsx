@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 import { Link } from 'react-router-dom';
 
 function NavItem(props: { title: string; link: string; }) {

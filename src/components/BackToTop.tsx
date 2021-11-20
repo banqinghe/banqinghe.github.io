@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 import { createPortal } from 'react-dom';
 
 interface BackToTopProps {

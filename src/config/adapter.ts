@@ -28,3 +28,4 @@ export { default as GlutLineCircle} from '../markdown/glut-line-circle.md?url';
 export { default as JavaStackQueueImplement } from '../markdown/java-stack-queue-implement.md?url';
 export { default as BeautyUbuntu } from '../markdown/beauty-ubuntu.md?url';
 export { default as CreateBlogWebsite } from '../markdown/create-blog-website.md?url';
+export { default as RewriteBlogWithVite } from '../markdown/rewrite-blog-with-vite.md?url';

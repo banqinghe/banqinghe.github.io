@@ -1,5 +1,16 @@
 [
   {
+    "title": "使用 Vite 重写博客",
+    "filename": "rewrite-blog-with-vite",
+    "date": "2021-11-23 17:30:11",
+    "description": "又花了一些时间在「折腾」上面",
+    "pathname": "/post/rewrite-blog-with-vite",
+    "tags": [
+      "blog",
+      "vite"
+    ]
+  },
+  {
     "title": "使用 create-react-app 构建静态博客",
     "filename": "create-blog-website",
     "date": "2021-06-29 23:21:27",

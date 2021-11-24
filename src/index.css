@@ -24,3 +24,10 @@ body {
 #comments {
     margin-top: 40px;
 }
+
+@layer base {
+    .markdown-body ol,
+    .markdown-body ul {
+        list-style: unset;
+    }
+}

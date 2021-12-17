@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
@@ -10,11 +10,14 @@ import Waline from '@waline/client';
 
 import transToCamelCase from '../utils/transToCamelCase';
 import { CatalogNode, getHeadingInfo } from '../utils/catalog';
-import * as urls from '../config/adapter';
+import { globalContext } from '../store';
 
 import 'katex/dist/katex.min.css';
 
 function PostPage() {
+  const { state } = useContext(globalContext);
+  const { postUrls } = state;
+
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname.replace(/^\/post\//, '');
@@ -58,7 +61,8 @@ function PostPage() {
   // Fetch the markdown text by pathname, url is defined at adapter.ts.
   // If response is not a markdown file, navigate to 404 page.
   useEffect(() => {
-    const mdUrl = (urls as { [key: string]: string })[transToCamelCase(pathname)];
+    // const mdUrl = (urls as { [key: string]: string })[transToCamelCase(pathname)];
+    const mdUrl = postUrls[transToCamelCase(pathname)];
     fetch(mdUrl)
       .then(res => {
         // Vite converts files smaller than 4kb to base64 by default, so the

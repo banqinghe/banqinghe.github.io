@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import postData from '../config/post-list.json';
+
+import { globalContext } from '../store';
 
 function PostList() {
+  const { state } = useContext(globalContext);
+  const { postList } = state;
+
   return (
     <div className="w-6/12 mx-auto">
-      {postData.map(({title, filename, date, pathname, tags, description}) => (
+      {postList.map(({title, filename, date, pathname, tags, description}) => (
         <section key={filename} className="mb-6">
           <h2 className="mb-2 text-xl font-bold hover:underline"><Link to={pathname}>{title}</Link></h2>
             <div className="flex items-center">

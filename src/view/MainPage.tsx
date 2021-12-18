@@ -7,9 +7,10 @@ import BackToTop from '../components/BackToTop';
 
 function MainPage() {
   return (
-    <main className="flex-1 pt-6 pb-3">
+    <main className="flex-1 pt-6 pb-3 relative">
       <Routes>
         <Route path="/" element={<PostList />} />
+        <Route path="/page/:pageNumber" element={<PostList />} />
         <Route path="/about" element={<About />} />
         <Route path="/post/:pathname" element={<PostPage />}></Route>
         <Route path="/404" element={<NoContent />}></Route>

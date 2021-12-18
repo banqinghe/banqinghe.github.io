@@ -7,6 +7,7 @@ module.exports = {
   variants: {
     extend: {
       fontWeight: ['hover'],
+      backgroundColor: ['active'],
       margin: ['last'],
     },
   },

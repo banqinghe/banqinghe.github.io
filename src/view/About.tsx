@@ -3,7 +3,7 @@ import Waline from '@waline/client';
 
 function About() {
   useEffect(() => {
-    document.title = '关于我';
+    document.title = '关于我 - bqh blog';
     Waline({
       el: '#comments',
       serverURL: 'https://blog-api-ers1r7f2f-banqinghe.vercel.app/',

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Pagination from '../components/Pagination';
 import { globalContext } from '../store';
@@ -15,6 +15,10 @@ function PostList() {
   const currentPageNumber = parseInt(params.pageNumber ?? '1', 10);
   const pageSize = 15;
  
+  useEffect(() => {
+    document.title = 'bqh blog'
+  }, []);
+
   return (
     <div className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto pb-8">
       {postList

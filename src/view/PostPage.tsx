@@ -87,7 +87,8 @@ function PostPage() {
       path: pathname,
     });
 
-    document.title = postList.find(post => post.filename === pathname)?.title ?? pathname;
+    const postTitle = postList.find(post => post.filename === pathname)?.title;
+    document.title = postTitle ? (postTitle + ' - bqh blog') : pathname;
   }, [pathname]);
 
   function scrollToTarget(id: string) {

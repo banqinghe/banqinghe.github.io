@@ -12,15 +12,14 @@ function About() {
   }, [])
 
   return (
-    <div className="w-7/12 mx-auto">
-      <article>
+    <div className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto">
+      <article style={{ fontSize: 15 }}>
         <p className="mb-2">你好，我是一名华东师范大学的大四学生。</p>
-        <p className="mb-4">Hello, I am an undergraduate student from East China Normal University.</p>
+        <p>Hello, I am an undergraduate student from East China Normal University.</p>
       </article>
       <div id="comments" />
     </div>
-    
-  )
+  );
 }
 
 export default About;

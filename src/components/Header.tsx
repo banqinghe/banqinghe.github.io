@@ -32,9 +32,9 @@ function Header() {
   }, [handleScroll]);
 
   return (
-    <header className={'z-10 sticky top-0 flex justify-between items-center h-14 px-12 bg-white bg-opacity-90 ' +
+    <header className={'z-10 sticky top-0 flex justify-between items-center h-14 px-4 md:px-12 bg-white bg-opacity-90 ' +
       'border-b border-gray-100 transition-transform duration-300 transform ' + (visible ? '' : '-translate-y-14')} >
-      <h1 className="flex items-center h-full text-2xl font-bold"><Link to="/">bqh blog</Link></h1>
+      <h1 className="flex items-center h-full text-lg md:text-2xl font-bold"><Link to="/">bqh blog</Link></h1>
       <nav className="h-full">
         <ul className="flex h-full">
           <NavItem title="笔记" link="note" />

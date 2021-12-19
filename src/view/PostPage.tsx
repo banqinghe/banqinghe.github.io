@@ -16,7 +16,7 @@ import 'katex/dist/katex.min.css';
 
 function PostPage() {
   const { state } = useContext(globalContext);
-  const { postUrls } = state;
+  const { postUrls, postList } = state;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -86,6 +86,8 @@ function PostPage() {
       serverURL: 'https://blog-api-ers1r7f2f-banqinghe.vercel.app/',
       path: pathname,
     });
+
+    document.title = postList.find(post => post.filename === pathname)?.title ?? pathname;
   }, [pathname]);
 
   function scrollToTarget(id: string) {
@@ -93,11 +95,11 @@ function PostPage() {
   }
 
   return (
-    <div className="w-6/12 mx-auto">
+    <div className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto">
 
       {/* Catalog */}
       <div
-        className="fixed top-20 left-5 pr-3 pb-3 bg-white bg-opacity-90 rounded-md overflow-auto transition-transform duration-200"
+        className="hidden xl:block fixed top-20 left-5 pr-3 pb-3 bg-white bg-opacity-90 rounded-md overflow-auto transition-transform duration-200"
         style={{
           maxHeight: 'calc(100vh - 160px)',
           maxWidth: 300,

@@ -16,7 +16,7 @@ function PostList() {
   const pageSize = 15;
  
   return (
-    <div className="w-6/12 mx-auto pb-8">
+    <div className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto pb-8">
       {postList
         .slice((currentPageNumber - 1) * pageSize, currentPageNumber * pageSize)
         .map(({ title, filename, date, pathname, tags, description }) => (

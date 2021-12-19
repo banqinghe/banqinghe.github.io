@@ -71,6 +71,9 @@ node_modules/rehype-highlight/index.d.ts:11:59 - error TS2694: Namespace '"node_
 
 手动把 `node_modules` 里的 `LowlightRoot` 改成 `Root` 才可以。这个问题有点怪。
 
+> **2021-12-19 更：** 十几天之前 `rehype-highlight` 官方解决了这个问题，并发布了新版本。
+> 将版本从 `5.0.0` 升级为 `5.0.1` 之后解决
+
 ## 目录功能
 
 之前的做法是用 react-markdown 的 `components` props 在处理标题 tag 的同时向外传输各级标题信息，之前遇到的问题现在也遇到了，调试时回调函数会执行两次，非常奇怪。
@@ -132,7 +135,15 @@ ul {
 
 ![waline test](https://gitee.com/banqinghe/blog-images/raw/master/rewrite-blog-with-vite/waline-test.png)
 
+## Vercel 部署
+
+原本一直都是用 Github Page 做静态页面部署，但是最近发现了更为优秀的 Vercel，使用体验和访问速度都可以说有了巨大提升。
+
+在 Vercel 上需要做的事情非常简单，只需关联上 github 仓库就好，build 和 deploy 工作全部是自动完成的。每次仓库的更新都会自动触发部署的更新，极其方便。
+
+另外一个很好的点竟然是自定义域名竟然也可以被生成 SSL，很舒服。
+
 ## 后续想做的
 
 - 命令行式工具（之前有个半截的）
-- 减少 vendor.js 体积（不太会，初步做了一下）
+- 减少 vendor.js 体积（不太会，初步做了一下），下一步的思路是把数学公式相关模块动态 import

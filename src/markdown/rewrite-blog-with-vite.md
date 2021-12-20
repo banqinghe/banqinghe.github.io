@@ -120,7 +120,6 @@ ul {
         list-style-type: unset;
     }
 }
-
 ```
 
 ## react-router 版本升级
@@ -141,9 +140,74 @@ ul {
 
 在 Vercel 上需要做的事情非常简单，只需关联上 github 仓库就好，build 和 deploy 工作全部是自动完成的。每次仓库的更新都会自动触发部署的更新，极其方便。
 
-另外一个很好的点竟然是自定义域名竟然也可以被生成 SSL，很舒服。
+另外一个很好的点竟然是自定义域名竟然也可以被生成 SSL，体验很好。
 
-## 后续想做的
+同时 Vercel 通过 rewrite 配置也可以让我们用上 `BrowserRouter`（[Why does react-router not works at vercel?](https://stackoverflow.com/questions/64815012/why-does-react-router-not-works-at-vercel#:~:text=If%20you%27re%20using%20react-router-dom%20with%20BrowserRouter%20you%20should,%22source%22%3A%20%22%2F%20%28%28%3F%21api%2F.%2A%29.%2A%29%22%2C%20%22destination%22%3A%20%22%2Findex.html%22%20%7D%20%5D%20%7D)）。之前把网站托管在 github page 上的时候只能被迫用 `HashRouter`，总觉得有点蹩脚。
 
-- 命令行式工具（之前有个半截的）
-- 减少 vendor.js 体积（不太会，初步做了一下），下一步的思路是把数学公式相关模块动态 import
+## 代码分割
+
+Vite 配置中有一项 `build.chunkSizeWarningLimit`，默认值为 500，这意味着编译完成后第三方包大于 500 KB 的时候就会触发 Warning，告知用户需要做一些代码分割之类的工作了。最开始我图省事把这个值改成了 1000，后来装了几个包之后发现 vendor.js 又已经超过 1000 KB 了。所以开始着手开搞 code split。
+
+由于 Vite 支持使用 Rollup 插件，所以在前人的铺垫下这件事做起来并不困难。
+
+首先，`rollup-plugin-analyzer` 插件可以检测打包时各个 bundle 的大小，给出一个包大小降序排列的统计表：
+
+```shell
+Rollup File Analysis
+-----------------------------
+bundle size:    1.281 MB
+original size:  1.428 MB
+code reduction: 10.25 %
+module count:   421
+
+███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+file:            D:/repo/banqinghe.github.io/node_modules/parse5/lib/tokenizer/named-entity-data.js
+bundle space:    7.26 %
+rendered size:   93.089 KB
+original size:   73.717 KB
+code reduction:  0 %
+dependents:      2
+  - D:/repo/banqinghe.github.io/node_modules/parse5/lib/tokenizer/named-entity-data.js?commonjs-proxy
+  - D:/repo/banqinghe.github.io/node_modules/parse5/lib/tokenizer/index.js
+
+...
+```
+
+通过这个插件可以找到是哪些包占据了主要的第三方包体积，我现在比较占地方的包主要是：
+
+- `react`，`react-dom`
+- `waline`（评论插件）
+- `katex`（数学公式支持）
+
+减小包体积地主要思路有两个：
+
+- 引入 CDN
+- 用 `React.lazy()` 做组件懒加载
+
+代码分割方法也比较好实现，引入 CDN 再做一些配置就好了。这里主要用到了 [`rollup-plugin-external-globals`](https://www.npmjs.com/package/rollup-plugin-external-globals) 插件，可以比较方便地把代码中的模块引用转化为对全局变量的引用。
+
+```typescript
+rollupOptions: {
+  plugins: [
+    externalGlobals({
+      'react': 'React',
+      'react-dom': 'ReactDOM',
+      katex: 'katex',
+      '@waline/client': 'Waline',
+      'highlight.js/lib/core': 'hljs',
+    }),
+  ],
+}
+```
+
+组件懒加载在路由处配置即可，将静态引用组件更改为使用 `React.lazy()` 引入：
+
+```typescript
+import PostPage from './PostPage';
+          ↓
+const PostPage = React.lazy(() => import('./PostPage'));
+```
+
+同时需要配合 `React.Suspense` 组件来规定当组件未加载完成时展示的加载页。
+
+一通操作之后终于让每个包的体积都降低到了 500 KB 以下，剩下体积较大的包都来自 [`parse5`](https://github.com/inikulin/parse5)，并没有找到 CDN 资源，就先不管了。

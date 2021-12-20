@@ -12,8 +12,6 @@ import transToCamelCase from '../utils/transToCamelCase';
 import { CatalogNode, getHeadingInfo } from '../utils/catalog';
 import { globalContext } from '../store';
 
-import 'katex/dist/katex.min.css';
-
 function PostPage() {
   const { state } = useContext(globalContext);
   const { postUrls, postList } = state;

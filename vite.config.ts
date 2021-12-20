@@ -14,7 +14,7 @@ export default defineConfig({
           'react': 'React',
           'react-dom': 'ReactDOM',
           katex: 'katex',
-          '@waline/client': 'Waline',
+          // '@waline/client': 'Waline',
           'highlight.js/lib/core': 'hljs',
         }),
         // analyze(),

@@ -2,8 +2,8 @@ import imgUrl from '../assets/404.gif';
 
 function NoContent() {
   return (
-    <div className="flex-1 flex justify-center items-end h-80">
-      <div className="text-center">
+    <div className="flex-1 flex justify-center items-start h-80">
+      <div className="text-center mt-14">
         <div>
           <img src={imgUrl} alt="404 No Content Image" className="inline w-40" />
         </div>

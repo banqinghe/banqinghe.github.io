@@ -32,11 +32,9 @@ body {
 }
 
 @media (min-width: 768px) {
-    #comment {
+    #comments {
         width: 100%;
-    }
-    .markdown-body {
-        font-size: 16px;
+        transform: translateX(0);
     }
 }
 

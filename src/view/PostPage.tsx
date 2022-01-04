@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext, useMemo, ReactNode } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeKatex from 'rehype-katex';
@@ -11,14 +11,20 @@ import Waline from '@waline/client';
 import transToCamelCase from '../utils/transToCamelCase';
 import { CatalogNode, getHeadingInfo } from '../utils/catalog';
 import { globalContext } from '../store';
+import { IconChevronLeft, IconChevronRight } from '../assets/icons';
+
+type AdjacentPostNav = {
+  path: string;
+  title: string;
+};
 
 function PostPage() {
-  const { state } = useContext(globalContext);
-  const { postUrls, postList } = state;
+  const { state, dispatch } = useContext(globalContext);
+  const { postUrls, postList, postIndex } = state;
 
   const navigate = useNavigate();
   const location = useLocation();
-  const pathname = location.pathname.replace(/^\/post\//, '');
+  const filename = location.pathname.replace(/^\/post\//, '');
 
   const [markdownText, setMarkdownText] = useState('');
   const [isNoContent, setIsNoContent] = useState(false);
@@ -30,6 +36,49 @@ function PostPage() {
       setCatalogCollapse(preState => !preState);
     }
   }
+
+  const adjacentPostList = useMemo(() => {
+    const prevNav: AdjacentPostNav = { path: '', title: '' };
+    const nextNav: AdjacentPostNav = { path: '', title: '' };
+    for (let i = 0, len = postList.length; i < len; i++) {
+      if (i !== postIndex) {
+        continue;
+      }
+      if (postIndex + 1 < len) {
+        nextNav.title = postList[i + 1].title;
+        nextNav.path = postList[i + 1].pathname;
+      }
+      if (postIndex - 1 >= 0) {
+        prevNav.title = postList[i - 1].title;
+        prevNav.path = postList[i - 1].pathname;
+      }
+    }
+    return [prevNav, nextNav];
+  }, [postIndex]);
+
+  const AdjacentPostButtonGroup = useMemo(() => {
+    const AdjButton = (props: { info: AdjacentPostNav, children: ReactNode } ) => (
+      <button
+        className="border border-gray-100 rounded text-gray-600 font-bold"
+        style={Object.assign({ width: '45%' }, props.info.path ? undefined : { opacity: 0, PointerEvents: 'none' })}
+        title={props.info.title}
+      >
+        <Link className="flex justify-center items-center h-full px-6 md:px-4" to={props.info.path}>{props.children}</Link>
+      </button>
+    );
+    return (
+      <div className="relative flex justify-between mt-12 h-12">
+        <AdjButton info={adjacentPostList[0]}>
+          <IconChevronLeft className="absolute left-1 md:left-3 w-6 h-6" />
+          <span className="w-10/12 truncate">{adjacentPostList[0].title}</span>
+        </AdjButton>
+        <AdjButton info={adjacentPostList[1]}>
+          <span className="w-10/12 truncate">{adjacentPostList[1].title}</span>
+          <IconChevronRight className="absolute right-1 md:right-3 w-6 h-6" />
+        </AdjButton>
+      </div>
+    );
+  }, [postIndex]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleSwitchCatalog);
@@ -48,19 +97,18 @@ function PostPage() {
     setCatalogList(getHeadingInfo(markdownText));
     const markdownBody = document.querySelector('.markdown-body');
     if (markdownBody) {
-      for (let i = 1; i <= 6; i++) {
-        (markdownBody as unknown as Element).querySelectorAll('h' + i).forEach((el, index) => {
-          el.id = 'h' + i + '-' + (index + 1);
-        });
-      }
+      markdownBody!.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach((el, index) => {
+        el.id = 'h-' + index;
+      });
     }
+    document.documentElement.scrollIntoView();
   }, [markdownText]);
 
-  // Fetch the markdown text by pathname, url is defined at adapter.ts.
+  // Fetch the markdown text by filename, url is defined at adapter.ts.
   // If response is not a markdown file, navigate to 404 page.
   useEffect(() => {
-    // const mdUrl = (urls as { [key: string]: string })[transToCamelCase(pathname)];
-    const mdUrl = postUrls[transToCamelCase(pathname)];
+    // const mdUrl = (urls as { [key: string]: string })[transToCamelCase(filename)];
+    const mdUrl = postUrls[transToCamelCase(filename)];
     fetch(mdUrl)
       .then(res => {
         // Vite converts files smaller than 4kb to base64 by default, so the
@@ -82,16 +130,21 @@ function PostPage() {
     Waline({
       el: '#comments',
       serverURL: 'https://blog-api-ers1r7f2f-banqinghe.vercel.app/',
-      path: pathname,
+      path: filename,
     });
 
-    const postTitle = postList.find(post => post.filename === pathname)?.title;
-    document.title = postTitle ? (postTitle + ' - bqh blog') : pathname;
-  }, [pathname]);
+    const postTitle = postList.find(post => post.filename === filename)?.title;
+    document.title = postTitle ? (postTitle + ' - bqh blog') : filename;
 
-  function scrollToTarget(id: string) {
-    (document.getElementById(id) as Element).scrollIntoView();
-  }
+    let currentIndex = 0;
+    for (let i = 0, len = postList.length; i < len; i++) {
+      if (location.pathname === postList[i].pathname) {
+        currentIndex = i;
+        break;
+      }
+    }
+    dispatch({ type: 'viewPost', payload: { postIndex: currentIndex } });
+  }, [filename]);
 
   return (
     <div className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto">
@@ -112,15 +165,9 @@ function PostPage() {
               className="mb-2.5 last:mb-0 text-sm cursor-pointer hover:underline"
               style={{ paddingLeft: (item.level - 1) * 20 }}
               key={index}
-              onClick={() => scrollToTarget('h' + item.level + '-' + item.index)}
-              onKeyDown={e => {
-                if (e.key === 'Enter') {
-                  scrollToTarget('h' + item.level + '-' + item.index)
-                }
-              }}
               tabIndex={0}
             >
-              {item.text}
+              <a href={'#h-' + index}>{item.text}</a>
             </li>
           ))}
         </ul>
@@ -135,6 +182,7 @@ function PostPage() {
         >
           {markdownText}
         </ReactMarkdown>
+        {AdjacentPostButtonGroup}
         <div id="comments" />
       </article>
     </div>

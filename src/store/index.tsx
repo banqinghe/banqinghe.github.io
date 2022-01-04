@@ -8,16 +8,25 @@ Object.entries(urls).forEach(([key, value]) => {
   postUrls[key] = value;
 });
 
+interface PostListInfo {
+  title: string;
+  filename: string;
+  date: string;
+  pathname: string;
+  tags: string[];
+  description?: string;
+}
+
 export interface GlobalState {
   /**
    * 文章列表信息
    */
-  postList: any[];
+  postList: PostListInfo[];
   
   /**
    * 当前文章序列数, 最近的博文序号为 0
    */
-  currentIndex: number;
+  postIndex: number;
   
   /**
    * 博文链接合集
@@ -25,21 +34,36 @@ export interface GlobalState {
   postUrls: {[key: string]: string};
 }
 
-export interface GlobalAction {
+interface GlobalAction {
   type: string;
   payload: any;
 }
 
-const initialState = {
+interface ViewPostAction extends GlobalAction {
+  payload: { postIndex: number }
+}
+
+const initialState: GlobalState = {
   postList: postData,
   postUrls,
-  currentIndex: 0,
+  postIndex: 0,
 };
 
 export const globalContext = React.createContext({state: initialState, dispatch: (value: GlobalAction) => {}});
 
+/** 进入博文页，改变 postIndex */
+function viewPostReducer(state: GlobalState, action: ViewPostAction) {
+  return {
+    ...state,
+    postIndex: action.payload.postIndex,
+  };
+}
+
 function reducer(state: GlobalState, action: GlobalAction) {
-  switch (action.type) {}
+  switch (action.type) {
+    case 'viewPost':
+      return viewPostReducer(state, action);
+  }
   return state;
 }
 

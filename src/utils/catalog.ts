@@ -16,7 +16,7 @@ class CatalogNode {
 
 function preorderTraverse(root: CatalogNode): Array<CatalogNode> {
   const seq: Array<CatalogNode> = [];
-  
+
   const recurse = (node: CatalogNode) => {
     seq.push(node);
     node.children.forEach(child => {
@@ -35,36 +35,31 @@ function getHeadingInfo(text: string) {
 
   const headCount = new Array(7).fill(0);
 
-  const line = [];
-  for (let i = 0, len = text.length; i < len; i++) {
-    if (text[i] === '\n') {
-      // When get a line of text, determine whether it starts with 1-6 '#'
-      // FIXME: Unable to distinguish '#' from the code text
-      const lineChars = line.join('');
-      for (let level = 6; level > 0; level--) {
-        if (lineChars.startsWith(Array.from({ length: level }).fill('#').join('') + ' ')) {
-          const content = lineChars.substring(level + 1).trim();
-          if (level === 1 && !catalogRoot.text) {
-            catalogRoot.text = content;
-          } else if (level > 1) {
-            curNode = new CatalogNode(level, content, [], ++headCount[level]);
-
-            while (lastNode.level >= level) {
-              lastNode = lastNode.parent as CatalogNode;
-            }
-            lastNode.children.push(curNode);
-            curNode.parent = lastNode;
-            lastNode = curNode;
-          }
-          break;
-        }
-      }
-
-      line.length = 0;
-      continue;
+  let isInCode = false;
+  text.split('\n').forEach(line => {
+    if (line.startsWith('```')) {
+      isInCode = !isInCode;
     }
-    line.push(text[i]);
-  }
+    const headingSharpsArr = line.match(/^#{1,6}\s/g);
+    if (!headingSharpsArr || isInCode) {
+      return
+    }
+    const level = headingSharpsArr[0].trim().length;
+    const content = line.substring(level + 1);
+
+    // build catalog node tree
+    if (level === 1) {
+      catalogRoot.text = content;
+    } else {
+      curNode = new CatalogNode(level, content, [], ++headCount[level]);
+      while (lastNode.level >= level && lastNode.parent) {
+        lastNode = lastNode.parent;
+      }
+      lastNode.children.push(curNode);
+      curNode.parent = lastNode;
+      lastNode = curNode;
+    }
+  });
 
   return preorderTraverse(catalogRoot);
 }

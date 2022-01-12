@@ -1,5 +1,14 @@
 [
   {
+    "title": "WebGL Guide Note",
+    "filename": "webgl-guide-note",
+    "date": "2022-01-12 22:51:06",
+    "pathname": "/post/webgl-guide-note",
+    "tags": [
+      "WebGL"
+    ]
+  },
+  {
     "title": "使用 Vite 重写博客",
     "filename": "rewrite-blog-with-vite",
     "date": "2021-11-23 17:30:11",

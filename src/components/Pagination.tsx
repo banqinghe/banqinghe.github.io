@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { IconChevronLeft, IconChevronRight } from '../assets/icons';
+import { IconChevronLeft, IconChevronRight } from '@/icons';
 
 interface PaginationProps {
   className?: string;
@@ -69,17 +69,21 @@ function Pagination(props: PaginationProps) {
         <IconChevronLeft className="w-4 h-4" />
       </button>
       <ul className="flex space-x-2">
-        {Array.from({ length: totalPage }, (_, index) => index + 1).map(number => (
-          <li key={number}>
-            <button
-              className={buttonItemClass}
-              onClick={() => onChange(number)}
-              style={{ boxShadow: current === number ? '0 3px 0 0 #374151' : 'none' }}
-            >
-              {number}
-            </button>
-          </li>
-        ))}
+        {Array.from({ length: totalPage }, (_, index) => index + 1).map(
+          number => (
+            <li key={number}>
+              <button
+                className={buttonItemClass}
+                onClick={() => onChange(number)}
+                style={{
+                  boxShadow: current === number ? '0 3px 0 0 #374151' : 'none',
+                }}
+              >
+                {number}
+              </button>
+            </li>
+          )
+        )}
       </ul>
       <button
         className={buttonItemClass + ' text-xl'}
@@ -88,7 +92,7 @@ function Pagination(props: PaginationProps) {
         <IconChevronRight className="w-4 h-4" />
       </button>
     </div>
-  )
+  );
 }
 
 export default Pagination;

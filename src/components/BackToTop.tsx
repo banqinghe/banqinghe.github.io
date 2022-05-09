@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import throttle from 'lodash/throttle';
 import { createPortal } from 'react-dom';
+import cn from 'classnames';
 
 interface BackToTopProps {
   className?: string;
@@ -11,7 +12,6 @@ interface BackToTopProps {
 
 function BackToTop(props: BackToTopProps) {
   const { className, bottom = 50, right = 50, heightThreshold = 500 } = props;
-  const cls = className ? (' ' + className) : '';
 
   const [isDisplay, setIsDisplay] = useState(false);
 
@@ -40,17 +40,32 @@ function BackToTop(props: BackToTopProps) {
     };
   }, []);
 
-  return createPortal((
+  return createPortal(
     <div
-      className={'fixed justify-center items-center w-10 h-10 border border-gray-100 rounded shadow-sm cursor-pointer' + cls}
+      className={cn(
+        'fixed justify-center items-center w-10 h-10 border border-gray-100 rounded shadow-sm cursor-pointer',
+        className
+      )}
       style={{ bottom, right, display: isDisplay ? 'flex' : 'none' }}
       onClick={handleClick}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 15l7-7 7 7"
+        />
       </svg>
-    </div>
-  ), document.body);
+    </div>,
+    document.body
+  );
 }
 
 export default BackToTop;

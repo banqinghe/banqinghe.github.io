@@ -1,8 +1,8 @@
-import Header from './components/Header';
-import Footer from './components/Footer';
-import MainPage from './view/MainPage';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import MainPage from '@/view/MainPage';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { GlobalProvider } from './store';
+import { GlobalProvider } from '@/store';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         </Router>
       </div>
     </GlobalProvider>
-  )
+  );
 }
 
-export default App
+export default App;

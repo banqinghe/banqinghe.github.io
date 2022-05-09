@@ -8,19 +8,13 @@ import gfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import Waline from '@waline/client';
 
-import transToCamelCase from '@/utils/transToCamelCase';
-import { CatalogNode, getHeadingInfo } from '@/utils/catalog';
 import { globalContext } from '@/store';
-import { IconChevronLeft, IconChevronRight } from '@/icons';
-
-type AdjacentPostNav = {
-  path: string;
-  title: string;
-};
+import AdjacentPostButtonGroup from '@/components/AdjacentPostButtonGroup';
+import { getPostUrlByFilename, CatalogNode, getHeadingInfo } from '@/utils';
 
 function PostPage() {
   const { state, dispatch } = useContext(globalContext);
-  const { postUrls, postList, postIndex } = state;
+  const { postList, postIndex } = state;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,8 +32,8 @@ function PostPage() {
   }
 
   const adjacentPostList = useMemo(() => {
-    const prevNav: AdjacentPostNav = { path: '', title: '' };
-    const nextNav: AdjacentPostNav = { path: '', title: '' };
+    const prevNav = { path: '', title: '' };
+    const nextNav = { path: '', title: '' };
     for (let i = 0, len = postList.length; i < len; i++) {
       if (i !== postIndex) {
         continue;
@@ -54,41 +48,6 @@ function PostPage() {
       }
     }
     return [prevNav, nextNav];
-  }, [postIndex]);
-
-  const AdjacentPostButtonGroup = useMemo(() => {
-    const AdjButton = (props: {
-      info: AdjacentPostNav;
-      children: ReactNode;
-    }) => (
-      <button
-        className="border border-gray-100 rounded text-gray-600 font-bold"
-        style={Object.assign(
-          { width: '45%' },
-          props.info.path ? undefined : { opacity: 0, PointerEvents: 'none' }
-        )}
-        title={props.info.title}
-      >
-        <Link
-          className="flex justify-center items-center h-full px-6 md:px-4"
-          to={props.info.path}
-        >
-          {props.children}
-        </Link>
-      </button>
-    );
-    return (
-      <div className="relative flex justify-between mt-12 h-12">
-        <AdjButton info={adjacentPostList[0]}>
-          <IconChevronLeft className="absolute left-1 md:left-3 w-6 h-6" />
-          <span className="w-10/12 truncate">{adjacentPostList[0].title}</span>
-        </AdjButton>
-        <AdjButton info={adjacentPostList[1]}>
-          <span className="w-10/12 truncate">{adjacentPostList[1].title}</span>
-          <IconChevronRight className="absolute right-1 md:right-3 w-6 h-6" />
-        </AdjButton>
-      </div>
-    );
   }, [postIndex]);
 
   useEffect(() => {
@@ -120,9 +79,7 @@ function PostPage() {
   // Fetch the markdown text by filename, url is defined at adapter.ts.
   // If response is not a markdown file, navigate to 404 page.
   useEffect(() => {
-    // const mdUrl = (urls as { [key: string]: string })[transToCamelCase(filename)];
-    const mdUrl = postUrls[transToCamelCase(filename)];
-    fetch(mdUrl)
+    fetch(getPostUrlByFilename(filename))
       .then(res => {
         // Vite converts files smaller than 4kb to base64 by default, so the
         // url of markdown file may be a base64 string that start with 'data:text'
@@ -196,7 +153,10 @@ function PostPage() {
         >
           {markdownText}
         </ReactMarkdown>
-        {AdjacentPostButtonGroup}
+        <AdjacentPostButtonGroup
+          left={adjacentPostList[0]}
+          right={adjacentPostList[1]}
+        />
         <div id="comments" />
       </article>
     </div>

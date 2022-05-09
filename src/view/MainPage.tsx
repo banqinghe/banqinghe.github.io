@@ -5,6 +5,7 @@ import PostList from '@/view/PostList';
 import About from '@/view/About';
 import NoContent from '@/view/NoContent';
 import BackToTop from '@/components/BackToTop';
+import Note from '@/view/Note';
 
 const PostPage = React.lazy(() => import('@/view/PostPage'));
 
@@ -23,6 +24,7 @@ function MainPage() {
           <Route path="/page/:pageNumber" element={<PostList />} />
           <Route path="/about" element={<About />} />
           <Route path="/post/:pathname" element={<PostPage />} />
+          <Route path="/note" element={<Note />} />
           <Route path="/404" element={<NoContent />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>

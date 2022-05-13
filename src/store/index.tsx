@@ -1,38 +1,13 @@
 import React, { useReducer } from 'react';
-import postData from '@/config/post-list.json';
-
-interface PostListInfo {
-  title: string;
-  filename: string;
-  date: string;
-  pathname: string;
-  tags: string[];
-  description?: string;
-}
-
-export interface GlobalState {
-  /**
-   * 文章列表信息
-   */
-  postList: PostListInfo[];
-
-  /**
-   * 当前文章序列数, 最近的博文序号为 0
-   */
-  postIndex: number;
-}
-
-interface GlobalAction {
-  type: string;
-  payload: any;
-}
-
-interface ViewPostAction extends GlobalAction {
-  payload: { postIndex: number };
-}
+import {
+  GlobalState,
+  GlobalAction,
+  ViewPostAction,
+  UpdatePostListAction,
+} from './types';
 
 const initialState: GlobalState = {
-  postList: postData,
+  postList: [],
   postIndex: 0,
 };
 
@@ -41,7 +16,22 @@ export const globalContext = React.createContext({
   dispatch: (value: GlobalAction) => {},
 });
 
-/** 进入博文页，改变 postIndex */
+/**
+ * 更新博文列表信息
+ */
+function updatePostListReducer(
+  state: GlobalState,
+  action: UpdatePostListAction
+) {
+  return {
+    ...state,
+    postList: action.payload.postList,
+  };
+}
+
+/**
+ * 进入博文页，改变 postIndex
+ */
 function viewPostReducer(state: GlobalState, action: ViewPostAction) {
   return {
     ...state,
@@ -52,9 +42,13 @@ function viewPostReducer(state: GlobalState, action: ViewPostAction) {
 function reducer(state: GlobalState, action: GlobalAction) {
   switch (action.type) {
     case 'viewPost':
+      console.log(action);
       return viewPostReducer(state, action);
+    case 'updatePostList':
+      return updatePostListReducer(state, action);
+    default:
+      return state;
   }
-  return state;
 }
 
 export function GlobalProvider(props: any) {

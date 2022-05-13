@@ -2,9 +2,10 @@ import { useEffect, useContext } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
 import { globalContext } from '@/store';
+import urls from '@/config/urls.json';
 
 function PostList() {
-  const { state } = useContext(globalContext);
+  const { state, dispatch } = useContext(globalContext);
   const { postList } = state;
 
   const navigate = useNavigate();
@@ -17,6 +18,17 @@ function PostList() {
 
   useEffect(() => {
     document.title = 'bqh blog';
+
+    fetch(urls['post-list'])
+      .then(res => res.json())
+      .then(postList => {
+        dispatch({
+          type: 'updatePostList',
+          payload: {
+            postList,
+          },
+        });
+      });
   }, []);
 
   return (

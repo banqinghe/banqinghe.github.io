@@ -5,16 +5,7 @@ import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import gfm from 'remark-gfm';
 import remarkMath from 'remark-math';
-
-const DemoText = `
-不错
-
-阿哲
-我觉得还**可以**
-\`\`\`javascript
-console.log('Hello World');
-\`\`\`
-`;
+import urls from '@/config/urls.json';
 
 interface NoteItem {
   title: string;
@@ -30,7 +21,7 @@ export default function Note() {
   const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('/note/note.md')
+    fetch(urls['note'])
       .then(res => res.text())
       .then(text => {
         const notes = text.split('\n---\n\n');

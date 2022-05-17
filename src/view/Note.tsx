@@ -16,9 +16,9 @@ interface NoteItem {
 
 const tagCls = 'bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-md ';
 
+// TODO: tags 侧边导航太丑，最好能有搜索的方式
 export default function Note() {
   const [notes, setNotes] = useState<NoteItem[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
     fetch(urls['note'])
@@ -26,7 +26,6 @@ export default function Note() {
       .then(text => {
         const notes = text.split('\n---\n\n');
         const noteStateList: NoteItem[] = [];
-        const tagSet = new Set<string>();
         for (const note of notes) {
           const noteState: NoteItem = {
             title: '',
@@ -40,7 +39,6 @@ export default function Note() {
               noteState.title = match[1];
             } else if ((match = line.match(/^TAG:\s+(.*)/))) {
               const tags = match[1].split(',');
-              tags.forEach(tag => tagSet.add(tag));
               noteState.tags.push(...tags);
             } else if ((match = line.match(/^DATE:\s+(.*)/))) {
               noteState.date = match[1];
@@ -51,18 +49,11 @@ export default function Note() {
           noteStateList.push(noteState);
         }
         setNotes(noteStateList);
-        setTags(Array.from(tagSet));
       });
   }, []);
 
   return (
     <div className="relative">
-      {/* TODO: tags filter */}
-      {/* <aside className="absolute">
-        {tags.map(tag => (
-          <span className={tagCls}>{tag}</span>
-        ))}
-      </aside> */}
       <article className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto">
         <h1 className="mb-4 text-3xl font-bold">Notes</h1>
         <div>

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { IconChevronLeft, IconChevronRight } from '@/icons';
+import { isHttpLink } from '@/utils';
 
 type AdjacentPostNav = {
   path: string;
@@ -22,12 +23,21 @@ function AdjButton(props: AdjButtonProps) {
       )}
       title={props.info.title}
     >
-      <Link
-        className="flex justify-center items-center h-full px-6 md:px-4"
-        to={props.info.path}
-      >
-        {props.children}
-      </Link>
+      {props.info.path && isHttpLink(props.info.path) ? (
+        <a
+          className="flex justify-center items-center h-full px-6 md:px-4"
+          href={props.info.path}
+        >
+          {props.children}
+        </a>
+      ) : (
+        <Link
+          className="flex justify-center items-center h-full px-6 md:px-4"
+          to={props.info.path}
+        >
+          {props.children}
+        </Link>
+      )}
     </button>
   );
 }
@@ -41,6 +51,7 @@ export default function AdjacentPostButtonGroup(
   props: AdjacentPostButtonGroupProps
 ) {
   const { left, right } = props;
+
   return (
     <div className="relative flex justify-between mt-12 h-12">
       <AdjButton info={left}>

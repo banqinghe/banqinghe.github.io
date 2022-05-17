@@ -2,6 +2,7 @@ import { useEffect, useContext } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
 import { globalContext } from '@/store';
+import { isHttpLink } from '@/utils';
 import urls from '@/config/urls.json';
 
 function PostList() {
@@ -38,7 +39,11 @@ function PostList() {
         .map(({ title, filename, date, pathname, tags, description }) => (
           <section key={filename} className="mb-6">
             <h2 className="mb-2 text-xl font-bold hover:underline">
-              <Link to={pathname}>{title}</Link>
+              {isHttpLink(pathname) ? (
+                <a href={pathname}>{title}</a>
+              ) : (
+                <Link to={pathname}>{title}</Link>
+              )}
             </h2>
             <div className="flex items-center">
               <div className="mr-3 text-xs text-gray-400">{date}</div>

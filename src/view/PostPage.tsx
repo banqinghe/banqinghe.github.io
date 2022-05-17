@@ -1,16 +1,11 @@
 import { useEffect, useState, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeKatex from 'rehype-katex';
-import rehypeRaw from 'rehype-raw';
-import gfm from 'remark-gfm';
-import remarkMath from 'remark-math';
 import Waline from '@waline/client';
 
 import { globalContext } from '@/store';
 import AdjacentPostButtonGroup from '@/components/AdjacentPostButtonGroup';
 import { getPostUrlByFilename, CatalogNode, getHeadingInfo } from '@/utils';
+import Markdown from './Markdown';
 
 function PostPage() {
   const { state, dispatch } = useContext(globalContext);
@@ -48,7 +43,7 @@ function PostPage() {
       }
     }
     return [prevNav, nextNav];
-  }, [postIndex]);
+  }, [postIndex, postList]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleSwitchCatalog);
@@ -146,13 +141,7 @@ function PostPage() {
 
       {/* Article */}
       <article>
-        <ReactMarkdown
-          className="markdown-body"
-          remarkPlugins={[gfm, remarkMath]}
-          rehypePlugins={[rehypeKatex, rehypeRaw, rehypeHighlight]}
-        >
-          {markdownText}
-        </ReactMarkdown>
+        <Markdown text={markdownText} />
         <AdjacentPostButtonGroup
           left={adjacentPostList[0]}
           right={adjacentPostList[1]}

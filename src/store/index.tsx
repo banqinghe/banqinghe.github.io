@@ -42,7 +42,6 @@ function viewPostReducer(state: GlobalState, action: ViewPostAction) {
 function reducer(state: GlobalState, action: GlobalAction) {
   switch (action.type) {
     case 'viewPost':
-      console.log(action);
       return viewPostReducer(state, action);
     case 'updatePostList':
       return updatePostListReducer(state, action);

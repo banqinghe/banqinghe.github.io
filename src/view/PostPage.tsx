@@ -1,19 +1,23 @@
-import { useEffect, useState, useContext, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Waline from '@waline/client';
-
-import { globalContext } from '@/store';
+import { postListState } from '@/recoil/atom';
+import { useRecoilValue } from 'recoil';
 import AdjacentPostButtonGroup from '@/components/AdjacentPostButtonGroup';
 import { getPostUrlByFilename, CatalogNode, getHeadingInfo } from '@/utils';
 import Markdown from './Markdown';
 
 function PostPage() {
-  const { state, dispatch } = useContext(globalContext);
-  const { postList, postIndex } = state;
+  const postList = useRecoilValue(postListState);
 
   const navigate = useNavigate();
   const location = useLocation();
   const filename = location.pathname.replace(/^\/post\//, '');
+
+  const postIndex = useMemo(
+    () => postList.findIndex(post => post.filename === filename),
+    [postList]
+  );
 
   const [markdownText, setMarkdownText] = useState('');
   const [isNoContent, setIsNoContent] = useState(false);
@@ -102,15 +106,6 @@ function PostPage() {
 
     const postTitle = postList.find(post => post.filename === filename)?.title;
     document.title = postTitle ? postTitle + ' - bqh blog' : filename;
-
-    let currentIndex = 0;
-    for (let i = 0, len = postList.length; i < len; i++) {
-      if (location.pathname === postList[i].pathname) {
-        currentIndex = i;
-        break;
-      }
-    }
-    dispatch({ type: 'viewPost', payload: { postIndex: currentIndex } });
   }, [filename]);
 
   return (

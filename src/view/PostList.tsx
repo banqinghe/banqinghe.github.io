@@ -1,20 +1,24 @@
-import { useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
-import { globalContext } from '@/store';
+import UpdatingBar from '@/components/UpdatingBar';
 import { isHttpLink } from '@/utils';
+import { postListState } from '@/recoil/atom';
+import { useRecoilState } from 'recoil';
+import cn from 'classnames';
 import urls from '@/config/urls.json';
 
 function PostList() {
-  const { state, dispatch } = useContext(globalContext);
-  const { postList } = state;
+  const [postList, setPostList] = useRecoilState(postListState);
+
+  const [updating, setUpdating] = useState(true);
 
   const navigate = useNavigate();
   const params = useParams();
 
   // pagination info
   const total = postList.length;
-  const currentPageNumber = parseInt(params.pageNumber ?? '1', 10);
+  const currentPageNumber = params.pageNumber ? Number(params.Number) : 1;
   const pageSize = 15;
 
   useEffect(() => {
@@ -22,18 +26,23 @@ function PostList() {
 
     fetch(urls['post-list'])
       .then(res => res.json())
-      .then(postList => {
-        dispatch({
-          type: 'updatePostList',
-          payload: {
-            postList,
-          },
-        });
+      .then(serverPostList => {
+        if (JSON.stringify(postList) === JSON.stringify(serverPostList)) {
+          return;
+        }
+        setPostList(serverPostList);
+      })
+      .finally(() => {
+        setUpdating(false);
+        setTimeout(() => {
+          document.getElementById('update-bar')!.style.display = 'none';
+        }, 1500);
       });
   }, []);
 
   return (
-    <div className="w-10/12 md:w-9/12 xl:w-6/12 mx-auto pb-8">
+    <div className="relative w-10/12 md:w-9/12 xl:w-6/12 mx-auto pb-8">
+      <UpdatingBar updating={updating} />
       {postList
         .slice((currentPageNumber - 1) * pageSize, currentPageNumber * pageSize)
         .map(({ title, filename, date, pathname, tags, description }) => (
@@ -63,7 +72,7 @@ function PostList() {
           </section>
         ))}
       <Pagination
-        className="absolute bottom-0"
+        className={cn('absolute bottom-0', { hidden: updating })}
         shortcut
         total={total}
         pageSize={pageSize}

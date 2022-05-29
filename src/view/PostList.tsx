@@ -18,7 +18,7 @@ function PostList() {
 
   // pagination info
   const total = postList.length;
-  const currentPageNumber = params.pageNumber ? Number(params.Number) : 1;
+  const currentPageNumber = params.pageNumber ? Number(params.pageNumber) : 1;
   const pageSize = 15;
 
   useEffect(() => {

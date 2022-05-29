@@ -35,7 +35,10 @@ function PostList() {
       .finally(() => {
         setUpdating(false);
         setTimeout(() => {
-          document.getElementById('update-bar')!.style.display = 'none';
+          const updateBar = document.getElementById('update-bar');
+          if (updateBar) {
+            updateBar.style.display = 'none';
+          }
         }, 1500);
       });
   }, []);

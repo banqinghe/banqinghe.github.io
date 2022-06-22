@@ -4,43 +4,45 @@
 @tailwind utilities;
 
 body {
-    @apply text-gray-800;
+  @apply text-gray-800;
 }
 
 ::selection {
-    @apply text-white bg-gray-800;
+  @apply text-white bg-gray-800;
 }
 
 ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+  width: 10px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(193,193,193, .6);
-    border-radius: 1000px;
+  background: rgba(193, 193, 193, 0.6);
+  border-radius: 1000px;
 }
 
 #comments {
-    margin-top: 40px;
-    width: 110%;
-    transform: translateX(-5%);
+  margin-top: 40px;
+  width: 110%;
+  transform: translateX(-5%);
 }
 
 .markdown-body {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 @media (min-width: 768px) {
-    #comments {
-        width: 100%;
-        transform: translateX(0);
-    }
+  #comments {
+    width: 100%;
+    transform: translateX(0);
+  }
 }
 
 @layer base {
-    .markdown-body ol,
-    .markdown-body ul {
-        list-style: unset;
-    }
+  .markdown-body ol {
+    list-style-type: decimal;
+  }
+  .markdown-body ul {
+    list-style-type: disc;
+  }
 }

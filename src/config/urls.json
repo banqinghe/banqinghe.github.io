@@ -1,5 +1,6 @@
 {
   "post-list": "https://raw.githubusercontent.com/banqinghe/blog/main/post-list.json",
   "post-prefix": "https://raw.githubusercontent.com/banqinghe/blog/main/post/",
+  "projects": "https://raw.githubusercontent.com/banqinghe/blog/main/projects.json",
   "note": "https://raw.githubusercontent.com/banqinghe/blog/main/note/note.md"
 }

@@ -51,7 +51,7 @@ function Header() {
       <nav className="h-full">
         <ul className="flex h-full">
           <NavItem title="笔记" link="note" />
-          <NavItem title="盒子" link="demo-box" />
+          <NavItem title="盒子" link="box" />
           <NavItem title="关于" link="about" />
         </ul>
       </nav>

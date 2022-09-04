@@ -8,3 +8,11 @@ export type PostInfo = {
 };
 
 export type PostList = PostInfo[];
+
+export type EssayInfo = {
+  title: string;
+  date: string;
+  pathname: string;
+};
+
+export type EssayList = EssayInfo[];

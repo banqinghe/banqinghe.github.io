@@ -4,8 +4,8 @@ import Waline from '@waline/client';
 import { postListState } from '@/recoil/atom';
 import { useRecoilValue } from 'recoil';
 import AdjacentPostButtonGroup from '@/components/AdjacentPostButtonGroup';
+import Markdown from '@/components/Markdown';
 import { getPostUrlByFilename, CatalogNode, getHeadingInfo } from '@/utils';
-import Markdown from './Markdown';
 
 function PostPage() {
   const postList = useRecoilValue(postListState);
@@ -75,7 +75,7 @@ function PostPage() {
     document.documentElement.scrollIntoView();
   }, [markdownText]);
 
-  // Fetch the markdown text by filename, url is defined at adapter.ts.
+  // Fetch the markdown text by filename
   // If response is not a markdown file, navigate to 404 page.
   useEffect(() => {
     fetch(getPostUrlByFilename(filename))

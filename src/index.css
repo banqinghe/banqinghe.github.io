@@ -28,7 +28,11 @@ body {
 }
 
 .markdown-body {
-  font-size: 15px;
+  font-size: 14px;
+}
+
+.markdown-body p {
+  line-height: 1.8;
 }
 
 @media (min-width: 768px) {
@@ -44,5 +48,18 @@ body {
   }
   .markdown-body ul {
     list-style-type: disc;
+  }
+}
+
+.up-to-top {
+  animation: up-to-top 0.5s ease-in;
+}
+
+@keyframes up-to-top {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

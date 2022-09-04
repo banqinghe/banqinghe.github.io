@@ -43,7 +43,7 @@ function BackToTop(props: BackToTopProps) {
   return createPortal(
     <div
       className={cn(
-        'fixed justify-center items-center w-10 h-10 border border-gray-100 rounded shadow-sm cursor-pointer',
+        'up-to-top fixed justify-center items-center w-10 h-10 border border-gray-100 bg-white bg-opacity-75 rounded shadow-sm cursor-pointer',
         className
       )}
       style={{ bottom, right, display: isDisplay ? 'flex' : 'none' }}

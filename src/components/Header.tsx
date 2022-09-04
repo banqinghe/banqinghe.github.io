@@ -50,6 +50,8 @@ function Header() {
       </h1>
       <nav className="h-full">
         <ul className="flex h-full">
+          {/* WIP */}
+          {/* <NavItem title="杂文" link="essay" /> */}
           <NavItem title="笔记" link="note" />
           <NavItem title="盒子" link="box" />
           <NavItem title="关于" link="about" />

@@ -6,6 +6,7 @@ export default [
         indent: 4,
         semi: true,
         quotes: 'single',
+        braceStyle: '1tbs',
     }),
     {
         files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],

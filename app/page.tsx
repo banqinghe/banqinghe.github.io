@@ -1,7 +1,13 @@
+import Posts from '@/components/Posts';
+import { getAllPosts } from '@/lib/api';
+
 export default function Home() {
+    const allPosts = getAllPosts();
+
     return (
-        <main className="flex h-full flex-col items-center justify-start font-sans md:relative md:flex-row md:items-start md:justify-center md:pb-12 md:pt-32">
-            Hello, bqh.
-        </main>
+        <>
+            <h1 className="mb-8 text-3xl font-bold">Writing</h1>
+            <Posts posts={allPosts} />
+        </>
     );
 }

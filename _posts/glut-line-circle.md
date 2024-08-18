@@ -16,7 +16,7 @@ date: "2019-10-08 16:47:03"
 
 大致的窗口配置如下：
 
-```c++
+```cpp
 void Init()
 {
     glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -53,7 +53,7 @@ DDA算法的原理很简单，即求出用户输入直线两端的坐标$(x1, y1
 
 实现的display函数如下：
 
-```c++
+```cpp
 void MyDraw::DDA_Draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -143,7 +143,7 @@ $$
 
 display函数如下
 
-```c++
+```cpp
 void MyDraw::Bresenham_Draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -217,7 +217,7 @@ y_{i+1}=round(\sqrt{R^2-x_{i+1}^2})
 $$
 display函数如下
 
-```c++
+```cpp
 void MyDraw::DiscreteDrawCircle()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -271,7 +271,7 @@ void MyDraw::DiscreteDrawCircle()
 
 绘图函数如下：
 
-```c++
+```cpp
 void MyDraw::BresenhamDrawCircle()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -325,7 +325,7 @@ void MyDraw::BresenhamDrawCircle()
 
 上网查了一下资料(比如[这里](https://stackoverflow.com/questions/3589422/using-opengl-glutdisplayfunc-within-class)和[这里](https://codeday.me/bug/20180123/124176.html))，发现我的原来的想法有点过于美好了。然后改进的方式是把绘图函数和表示坐标的数字改成static的。C++中的static变量和函数和Java里好像差别不小的样子？反正我的初始化最后变成了这个样子：
 
-```c++
+```cpp
 class MyDraw {
 public:
     MyDraw();

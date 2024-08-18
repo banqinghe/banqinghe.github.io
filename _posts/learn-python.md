@@ -345,7 +345,7 @@ else:
 
 python对条件要求没有Java那么死板：
 
-```Java
+```java
 if(1)	// 在Java中这是无法通过编译的
 if 1 :	# 在python中，数字为非零即是真
 ```

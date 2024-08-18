@@ -1,7 +1,14 @@
-import { remark } from 'remark';
-import html from 'remark-html';
+import markdownit from 'markdown-it';
+import shiki from '@shikijs/markdown-it';
 
-export async function markdownToHtml(markdown: string) {
-    const result = await remark().use(html).process(markdown);
-    return result.toString();
+const md = markdownit({
+    html: true,
+});
+
+md.use(await shiki({
+    theme: 'github-light',
+}));
+
+export function markdownToHtml(markdown: string) {
+    return md.render(markdown);
 }

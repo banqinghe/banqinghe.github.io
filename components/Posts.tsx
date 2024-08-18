@@ -7,7 +7,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
         if (yearMap.has(year)) {
             yearMap.set(year, [...yearMap.get(year)!, post]);
         } else {
-            yearMap.set(year, []);
+            yearMap.set(year, [post]);
         }
         return yearMap;
     }, new Map<string, Post[]>());
@@ -22,8 +22,8 @@ export default function Posts({ posts }: { posts: Post[] }) {
                             <h3 className="text-lg font-medium mb-3 leading-snug">
                                 {title}
                             </h3>
-                            <time dateTime={date.slice(5, 10)} className="ml-3 text-md text-gray-400 whitespace-nowrap">
-                                {date.slice(5, 10)}
+                            <time dateTime={date.slice(5, 10)} className="ml-3 text-md text-gray-400 whitespace-nowrap font-mono">
+                                {date.slice(5, 10).split('-').join('/')}
                             </time>
                         </Link>
                     ))}

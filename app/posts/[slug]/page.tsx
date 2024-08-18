@@ -32,14 +32,14 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function Post({ params }: Params) {
+export default function Post({ params }: Params) {
     const post = getPostBySlug(params.slug);
 
     if (!post) {
         return notFound();
     }
 
-    const content = await markdownToHtml(post.content || '');
+    const content = markdownToHtml(post.content || '');
 
     return (
         <article className="mb-16 md:mb-32">
@@ -48,14 +48,7 @@ export default async function Post({ params }: Params) {
                 <time className="text-gray-400" dateTime={post.date}>{post.date}</time>
                 <Link href="/" className="absolute right-0 bottom-0 underline hover:opacity-80">Back</Link>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: content }} />
-            {/* <PostHeader
-            title={post.title}
-            coverImage={post.coverImage}
-            date={post.date}
-            author={post.author}
-          />
-          <PostBody content={content} /> */}
+            <div className="prose" dangerouslySetInnerHTML={{ __html: content }} />
         </article>
     );
 }

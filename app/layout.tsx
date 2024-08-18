@@ -19,7 +19,7 @@ export default function RootLayout({
     return (
         <html lang="zh">
             <head>
-                <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+                <link rel="shortcut icon" href="/favicon.ico" />
             </head>
             <body className={cn(inter.className, 'text-gray-700')}>
                 <main className="w-[640px] max-w-[90%] mx-auto pt-12 md:pt-24">

@@ -44,7 +44,7 @@ export default function Post({ params }: Params) {
     return (
         <article className="mb-16 md:mb-32">
             <div className="relative mb-8">
-                <h1 className="mb-3 text-2xl md:text-4xl font-bold">{post.title}</h1>
+                <h1 className="mb-6 text-2xl md:text-4xl font-bold">{post.title}</h1>
                 <time className="text-gray-400" dateTime={post.date}>{post.date}</time>
                 <Link href="/" className="absolute right-0 bottom-0 underline hover:opacity-80">Back</Link>
             </div>

@@ -14,7 +14,7 @@ date: "2019-08-01 18:08:26"
 可以选择用命令行安装：
 
 ```shell
-sudo apt install gnome-tweak-tool 
+sudo apt install gnome-tweak-tool
 ```
 
 也可以在软件商店中直接搜索GNOME Tweaks安装
@@ -67,7 +67,7 @@ sudo gedit /etc/alternatives/gdm3.css
 ```css
 #lockDialogGroup {
   background: #2c001e url(resource:///org/gnome/shell/theme/noise-texture.png);
-  background-repeat: repeat; 
+  background-repeat: repeat;
 }
 ```
 
@@ -75,10 +75,10 @@ sudo gedit /etc/alternatives/gdm3.css
 
 ```css
 #lockDialogGroup {
-  background: #2c001e url(file:///usr/share/backgrounds/mypicture.jpg);         
+  background: #2c001e url(file:///usr/share/backgrounds/mypicture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center; 
+  background-position: center;
 }
 ```
 

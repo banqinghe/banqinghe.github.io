@@ -1,6 +1,7 @@
 import markdownit from 'markdown-it';
 import shiki from '@shikijs/markdown-it';
 import iterator from 'markdown-it-for-inline';
+import mathjax3 from 'markdown-it-mathjax3';
 import { preWrapperPlugin } from './preWrapperPlugin';
 import { HOSTNAME } from './constants';
 
@@ -21,7 +22,8 @@ md.use(await shiki({ theme: 'one-light' }))
             token.attrPush(['target', '_blank']);
         }
     })
-    .use(preWrapperPlugin);
+    .use(preWrapperPlugin)
+    .use(mathjax3);
 
 export function markdownToHtml(markdown: string) {
     return md.render(markdown);

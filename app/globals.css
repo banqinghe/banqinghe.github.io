@@ -24,3 +24,7 @@
 .code-block-wrapper > pre {
     margin: 0;
 }
+
+mjx-container svg {
+    display: initial;
+}

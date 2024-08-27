@@ -13,6 +13,9 @@ export default [
         languageOptions: {
             parser: parserTs,
         },
+        rules: {
+            '@stylistic/arrow-parens': ['error', 'as-needed'],
+        },
     },
     {
         ignores: ['.next/**'],

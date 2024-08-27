@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="flex justify-between mt-16 mb-16 text-xs md:text-sm text-gray-400">
+        <footer className="w-[640px] max-w-[90%] flex justify-between pt-16 pb-16 mx-auto text-xs md:text-sm text-gray-400">
             <div>
                 <abbr
                     className="cursor-help decoration-dotted"

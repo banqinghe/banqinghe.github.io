@@ -17,6 +17,9 @@ importers:
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0
+      markdown-it-anchor:
+        specifier: ^9.0.1
+        version: 9.0.1(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       markdown-it-for-inline:
         specifier: ^2.0.1
         version: 2.0.1
@@ -805,6 +808,12 @@ packages:
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
+
+  markdown-it-anchor@9.0.1:
+    resolution: {integrity: sha512-cBt7aAzmkfX8X7FqAe8EBryiKmToXgMQEEMqkXzWCm0toDtfDYIGboKeTKd8cpNJArJtutrf+977wFJTsvNGmQ==}
+    peerDependencies:
+      '@types/markdown-it': '*'
+      markdown-it: '*'
 
   markdown-it-for-inline@2.0.1:
     resolution: {integrity: sha512-JGOi3/Ohhzehs+1qSA4CkDydmVBtiYi2q2BD//YtTbSK+75InrGJX2MtPq1AdMeC4BV7rwEhq1+3pLnwGbsgzA==}
@@ -2024,6 +2033,11 @@ snapshots:
       js-tokens: 4.0.0
 
   lru-cache@10.4.3: {}
+
+  markdown-it-anchor@9.0.1(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
+    dependencies:
+      '@types/markdown-it': 14.1.2
+      markdown-it: 14.1.0
 
   markdown-it-for-inline@2.0.1: {}
 

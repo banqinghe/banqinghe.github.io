@@ -22,10 +22,8 @@ export default function RootLayout({
                 <link rel="shortcut icon" href="/favicon.ico" />
             </head>
             <body className={cn(inter.className, 'text-gray-700')}>
-                <main className="w-[640px] max-w-[90%] mx-auto pt-12 md:pt-24">
-                    {children}
-                    <Footer />
-                </main>
+                {children}
+                <Footer />
             </body>
         </html>
     );

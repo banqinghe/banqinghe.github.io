@@ -12,6 +12,7 @@
         "@shikijs/markdown-it": "^1.14.1",
         "classnames": "^2.5.1",
         "markdown-it": "^14.1.0",
+        "markdown-it-anchor": "^9.0.1",
         "markdown-it-for-inline": "^2.0.1",
         "markdown-it-mathjax3": "^4.3.2",
         "next": "14.2.5",

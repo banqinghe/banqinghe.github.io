@@ -36,7 +36,7 @@ function OutlineItem({ headers, className = '' }: { headers: MenuItem[]; classNa
 
     const LinkItem = ({ header }: { header: MenuItem }) => (
         <li className="text-slate-500 hover:text-slate-950 transition-colors">
-            <a href={header.link} onClick={handleClickLink}>
+            <a className="block" href={header.link} onClick={handleClickLink}>
                 {header.element.innerText}
             </a>
         </li>

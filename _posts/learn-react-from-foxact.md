@@ -96,7 +96,7 @@ const playerRef = useSingleton(() => new VideoPlayer());
 
 根据作者提供的 [Chromium commit](https://chromium.googlesource.com/chromium/src/+/afce9d93e76f2ff81baaa088a4ea25f67d1a76b3%5E%21/)，Chrome 这么做的理由是符合 web 标准。我查阅了一下具体[标准](https://w3c.github.io/uievents/#event-type-compositionend:~:text=the%20compositionend%20event%20MUST%20be%20dispatched%20after%20the%20control%20is%20updated.)，再回过头来看 Chromium 的这个 commit，发现也挺有道理。标准要求 `compositionend` 事件在**控件被更新后**调用，而 Blink 的 `input` 事件会**更新控件**。
 
-\<iframe src="https://banqinghe.github.io/pages/use-composition-input/index.html">\</iframe>
+<iframe style="width:100%;height:400px;border:1px solid #e5e7eb" src="https://banqinghe.github.io/pages/use-composition-input/index.html"></iframe>
 
 ## useCallback 的使用时机
 

@@ -100,7 +100,7 @@ const playerRef = useSingleton(() => new VideoPlayer());
 
 ## useCallback 的使用时机
 
-&#x20;之前我觉得 `useMemo` 和 `useCallback` 在绝大多数情况下都是不需要用到的 React API，在业务开发中不用这些繁琐的优化也不会影响到用户体验。
+之前我觉得 `useMemo` 和 `useCallback` 在绝大多数情况下都是不需要用到的 React API，在业务开发中不用这些繁琐的优化也不会影响到用户体验。
 
 在工作中我只有一次感到不得不使用它们，场景是我在页面中渲染了一个巨大的表格，不将表格缓存起来会严重影响表格之外的用户交互（现在看起来倒是可以尝试使用 `useDeferredValue` 来避免一部分这个问题）。
 

@@ -3,6 +3,11 @@ import { Post } from '@/interface/post';
 
 export default function Posts({ posts }: { posts: Post[] }) {
     const years = posts.reduce((yearMap, post) => {
+        // filter out some posts
+        if (/thinking-in-java-\d/.test(post.slug)) {
+            return yearMap;
+        }
+
         const year = post.date.slice(0, 4);
         if (yearMap.has(year)) {
             yearMap.set(year, [...yearMap.get(year)!, post]);

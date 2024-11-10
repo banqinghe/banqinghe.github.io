@@ -386,5 +386,5 @@ this.prefixParseFns = new Map([
 
 理解算法的最好方法果然还是跟着逻辑流走一遍，文章里写了基础完整的执行流程，帮助我自己很好地理解了 Pratt Parser 的过程。
 
-Monkey 语言中还有函数声明等表达式需要解析，在 https://github.com/banqinghe/monkey-interpreter-ts/blob/main/src/parser.ts 有完整的实现。
+Monkey 语言中还有函数声明等表达式需要解析，在 [https://github.com/banqinghe/monkey-interpreter-ts/blob/main/src/parser.ts](https://github.com/banqinghe/monkey-interpreter-ts/blob/main/src/parser.ts) 有完整的实现。
 

@@ -12,13 +12,17 @@ const config: Config = {
             typography: {
                 DEFAULT: {
                     css: {
-                        code: {
-                            '&::before': {
+                        'code': {
+                            '&::before, &::after': {
                                 display: 'none',
                             },
-                            '&::after': {
+                        },
+                        'blockquote p': {
+                            '&::before, &::after': {
                                 display: 'none',
                             },
+                            'opacity': 0.7,
+                            'font-style': 'normal',
                         },
                     },
                 },

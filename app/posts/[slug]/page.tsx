@@ -45,7 +45,7 @@ export default function Post({ params }: Params) {
     return (
         <main>
             <Outline />
-            <article className="w-[640px] max-w-[90%] mx-auto pt-12 md:pt-24">
+            <article className="w-[700px] max-w-[90%] mx-auto pt-12 md:pt-24">
                 <div className="relative mb-8">
                     <h1 className="mb-6 text-2xl md:text-4xl font-bold">{post.title}</h1>
                     <time className="text-gray-400 font-mono" dateTime={post.date}>{post.date}</time>

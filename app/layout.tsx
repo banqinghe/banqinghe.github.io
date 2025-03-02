@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import './globals.css';
-import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
     title: 'Writing',
@@ -19,7 +18,6 @@ export default function RootLayout({
             </head>
             <body className="text-gray-700">
                 {children}
-                <Footer />
             </body>
         </html>
     );

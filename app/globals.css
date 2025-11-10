@@ -28,3 +28,7 @@
 mjx-container svg {
     display: initial;
 }
+
+.table-fixed-container > table {
+    table-layout: fixed;
+}

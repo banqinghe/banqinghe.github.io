@@ -3,6 +3,7 @@ import shiki from '@shikijs/markdown-it';
 import iterator from 'markdown-it-for-inline';
 import mathjax3 from 'markdown-it-mathjax3';
 import anchor from 'markdown-it-anchor';
+import container from 'markdown-it-container';
 import { preWrapperPlugin } from './preWrapperPlugin';
 import { HOSTNAME } from '../constants';
 
@@ -43,6 +44,19 @@ md.use(await shiki({ theme: 'one-light' }))
                 };
             },
         }),
+    })
+    .use(container, 'any', {
+        validate: (params: string) => {
+            return !!params.trim();
+        },
+        render: (tokens: any[], idx: number) => {
+            const className = tokens[idx].info.trim();
+            if (tokens[idx].nesting === 1) {
+                return `<div class="${className}">\n`;
+            } else {
+                return '</div>\n';
+            }
+        },
     });
 
 export function markdownToHtml(markdown: string) {

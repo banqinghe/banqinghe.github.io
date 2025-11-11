@@ -25,6 +25,10 @@
     margin: 0;
 }
 
+mjx-container {
+    overflow-x: auto;
+}
+
 mjx-container svg {
     display: initial;
 }

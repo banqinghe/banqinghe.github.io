@@ -1,0 +1,11 @@
+.shiki.shiki-themes.one-light {
+    color: var(--shiki-light);
+    span {
+        color: var(--shiki-light);
+    }
+}
+
+.scroll-code-block pre.shiki {
+    max-height: 600px;
+    overflow: auto;
+}

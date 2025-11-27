@@ -4,6 +4,7 @@ import iterator from 'markdown-it-for-inline';
 import mathjax3 from 'markdown-it-mathjax3';
 import anchor from 'markdown-it-anchor';
 import container from 'markdown-it-container';
+import markdownItCjkFriendly from 'markdown-it-cjk-friendly';
 import { preWrapperPlugin } from './preWrapperPlugin';
 import { HOSTNAME } from '../constants';
 
@@ -12,6 +13,7 @@ const md = markdownit({
 });
 
 md.use(await shiki({ theme: 'one-light' }))
+    .use(markdownItCjkFriendly)
     .use(iterator, 'external_link', 'link_open', (tokens: any[], idx: number) => {
         const token = tokens[idx];
         let url: URL;

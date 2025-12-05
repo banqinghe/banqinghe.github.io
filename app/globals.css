@@ -36,3 +36,21 @@ mjx-container svg {
 .table-fixed-container > table {
     table-layout: fixed;
 }
+
+.text-mask p {
+    display: inline;
+    background: black;
+    transition: 0.3s ease;
+    color: black !important;
+    strong {
+        color: black !important;
+    }
+}
+
+.text-mask:hover p {
+    background: transparent;
+    color: inherit !important;
+    strong {
+        color: inherit !important;
+    }
+}

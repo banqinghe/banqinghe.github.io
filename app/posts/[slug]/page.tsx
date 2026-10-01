@@ -7,13 +7,14 @@ import { markdownToHtml } from '@/lib/markdown/markdown';
 import Outline from './Outline';
 
 interface Params {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-    const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
 
     if (!post) {
         return notFound();
@@ -34,8 +35,9 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function Post({ params }: Params) {
-    const post = getPostBySlug(params.slug);
+export default async function Post({ params }: Params) {
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
 
     if (!post) {
         return notFound();

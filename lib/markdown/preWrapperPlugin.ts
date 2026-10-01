@@ -2,7 +2,7 @@
  * https://github.com/vuejs/vitepress/blob/main/src/node/markdown/plugins/preWrapper.ts
  */
 
-import type MarkdownIt from 'markdown-it';
+import type { MarkdownIt } from 'markdown-it';
 
 export function preWrapperPlugin(md: MarkdownIt) {
     const fence = md.renderer.rules.fence!;
@@ -16,10 +16,10 @@ export function preWrapperPlugin(md: MarkdownIt) {
         const className = extractAttr(token.info, 'class');
 
         return (
-        `<div class="code-block-wrapper ${className ?? ''}">`
-        + `<span class="lang">${lang}</span>`
-        + fence(...args)
-        + '</div>'
+            `<div class="code-block-wrapper ${className ?? ''}">`
+            + `<span class="lang">${lang}</span>`
+            + fence(...args)
+            + '</div>'
         );
     };
 }

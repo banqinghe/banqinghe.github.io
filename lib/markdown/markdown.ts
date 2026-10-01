@@ -1,12 +1,19 @@
 import markdownit from 'markdown-it';
+import type { MarkdownIt } from 'markdown-it';
 import shiki from '@shikijs/markdown-it';
 import iterator from 'markdown-it-for-inline';
 import mathjax3 from 'markdown-it-mathjax3';
 import anchor from 'markdown-it-anchor';
-import container from 'markdown-it-container';
+import containerPlugin from 'markdown-it-container';
 import markdownItCjkFriendly from 'markdown-it-cjk-friendly';
 import { preWrapperPlugin } from './preWrapperPlugin';
 import { HOSTNAME } from '../constants';
+
+const container = containerPlugin as unknown as (
+    md: MarkdownIt,
+    name: string,
+    opts?: Parameters<typeof containerPlugin>[2],
+) => void;
 
 const md = markdownit({
     html: true,

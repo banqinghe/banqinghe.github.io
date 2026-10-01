@@ -18,6 +18,6 @@ export default [
         },
     },
     {
-        ignores: ['.next/**'],
+        ignores: ['.next/**', 'out/**', 'next-env.d.ts'],
     },
 ];

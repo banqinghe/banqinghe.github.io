@@ -34,11 +34,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "26"
       - name: Setup pnpm
         uses: pnpm/action-setup@v4.0.0
         with:
-          version: "latest"
+          version: "10"
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { Tabs } from '@base-ui-components/react/tabs';
+import { Tabs } from '@base-ui/react/tabs';
 import CodeTab, { type CodeTabProps } from '../code-tab';
 import { commonStyles } from '../code-templates';
 
